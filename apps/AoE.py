@@ -215,9 +215,9 @@ def regular_cut(energy, y, ds):
     print(line)
 
     ##Draw up 2D hist of AoverE vs E
-    plt.hist2d(energy, y, bins=[1000,200], range=[[0, 2000], [0, 2]],
+    plt.hist2d(energy, y, bins=[1000,200], range=[[0, 3000], [0, 2]],
                 norm=LogNorm(), cmap='jet')
-    plt.hlines(line, 0, 2000, color='r', linewidth=1.5)
+    plt.hlines(line, 0, 3000, color='r', linewidth=1.5)
     cbar = plt.colorbar()
     plt.title("Dataset {}: 2D A/E vs E".format(ds.ds_list[0]))
     plt.xlabel("Energy (keV)", ha='right', x=1)
@@ -247,8 +247,8 @@ def regular_cut(energy, y, ds):
     plt.legend()
     plt.show()
 
-    hist, bins = np.histogram(energy, bins=2000, range=[0,2000])
-    hist1, bins1 = np.histogram(e1, bins=2000, range=[0,2000])
+    hist, bins = np.histogram(energy, bins=3000, range=[0,3000])
+    hist1, bins1 = np.histogram(e1, bins=3000, range=[0,3000])
 
     plt.clf()
     plt.semilogy(bins[1:], hist, color='black', ds="steps", linewidth=1.5,
@@ -335,9 +335,9 @@ def th_232(energy, a_over_e, ds, write_db=False):
     print(line)
 
     plt.clf()
-    plt.hist2d(energy, a_over_e, bins=[1350,200], range=[[0, 2700], [0, 2]],
+    plt.hist2d(energy, a_over_e, bins=[1350,200], range=[[0, 3000], [0, 2]],
                 norm=LogNorm(), cmap='jet')
-    plt.hlines(line, 0, 2700, color='r', linewidth=1.5)
+    plt.hlines(line, 0, 3000, color='r', linewidth=1.5)
     plt.xlabel("Energy (keV)", ha='right', x=1)
     plt.ylabel("A/Eunc", ha='right', y=1)
     plt.title("Dataset {}: 2D A/E vs E".format(ds.ds_list[0]))
@@ -366,8 +366,8 @@ def th_232(energy, a_over_e, ds, write_db=False):
     plt.legend()
     plt.show()
 
-    hist, bins = np.histogram(energy, bins=2700, range=[0,2700])
-    hist1, bins1 = np.histogram(e1, bins=2700, range=[0,2700])
+    hist, bins = np.histogram(energy, bins=3000, range=[0,3000])
+    hist1, bins1 = np.histogram(e1, bins=3000, range=[0,3000])
 
     plt.clf()
     plt.semilogy(bins[1:], hist, color='black', ds="steps", linewidth=1.5,

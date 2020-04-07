@@ -158,16 +158,28 @@ class DataSet:
            # search data directories for extant files
 
            # Check for raw Data
+           # for p, d, files in os.walk(self.raw_dir):
+           #     for f in files:
+           #         for r in runs:
+           #             if f.endswith(".fcio"):
+           #                 if int(f.split("run")[-1].split("-")[0]) == r:
+           #                    run = int(f.split("run")[-1].split("-")[0])
+           #                    print(run)
+           #                    self.paths[run]["t0_path"] = "{}/{}".format(p,f)
            counter = 1
            for p, d, files in os.walk(self.raw_dir):
                for f in files:
                    for r in runs:
                        if f.endswith(".fcio"):
                            if int(f.split("run")[-1].split("-")[0]) == r:
+                               
                                if counter==subfile:
                                   run = int(f.split("run")[-1].split("-")[0])
                                   self.paths[run]["t0_path"] = "{}/{}".format(p,f)
                                counter+=1
+
+
+
 
            # Check for tier1 Data
            counter = 1
@@ -225,7 +237,7 @@ class DataSet:
                         self.paths[run]["t2_path"] = "{}/{}".format(p,f)
 
         else:
-	
+
             suffix = "." + "h5"#edit: we need this also here. One has to set the suffix then
                         # in the config file ("suffix":"h5")
 

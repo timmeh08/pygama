@@ -5,14 +5,14 @@ import sys
 import numpy as np
 import matplotlib.pyplot as plt
 
-def get_dataset_from_cmdline(args, run_db, cal_db):
+def get_dataset_from_cmdline(args, run_db, cal_db, sub=None):
     """
     make it easier to call this from argparse:
         arg("-ds", nargs='*', action="store", help="load runs for a DS")
         arg("-r", "--run", nargs=1, help="load a single run")
     """
     from pygama import DataSet
-    
+
     if args["ds"]:
         ds_lo = int(args["ds"][0])
         try:
@@ -20,9 +20,9 @@ def get_dataset_from_cmdline(args, run_db, cal_db):
         except:
             ds_hi = None
         ds = DataSet(ds_lo, ds_hi, md=run_db, cal=cal_db, v=args["verbose"])
-    
+
     if args["run"]:
-        ds = DataSet(run=int(args["run"][0]), md=run_db, cal=cal_db, 
+        ds = DataSet(run=int(args["run"][0]), md=run_db, cal=cal_db,
                      v=args["verbose"])
     return ds
 
@@ -235,4 +235,3 @@ def sh(cmd, sh=False):
         sp.call(shlex.split(cmd))  # "safe"
     else:
         sp.call(cmd, shell=sh)  # "less safe"
-

@@ -1,9 +1,10 @@
 {
-  "loc_dir":"/lfs/l1/legend/users/zschocke/Meta/HADES/test",
-  "raw_dir":"/lfs/l1/legend/detector_char/enr/hades/char_data/I02160A/tier0/co_HS5_top_hvs",
-  "tier1_dir":"/lfs/l1/legend/detector_char/enr/hades/char_data/I02160A/tier1/co_HS5_top_hvs/pygama",
-  "tier2_dir":"/lfs/l1/legend/detector_char/enr/hades/char_data/I02160A/tier2/co_HS5_top_hvs/pygama",
-  "meta_dir":"/lfs/l1/legend/users/zschocke/Meta/HADES/test",
+  "loc_dir":"$DATADIR/HADES",
+  "raw_dir":"$DATADIR/HADES/Data",
+  "tier1_dir":"$DATADIR/HADES/tier1",
+  "tier2_dir":"$DATADIR/HADES/tier2",
+  "meta_dir":"$DATADIR/HADES/Data",
+  "filetype":"hades_char",
   "digitizer": "FlashCam",
   "daq": "FlashCam",
   "t1_prefix": "t1_run",
@@ -15,6 +16,7 @@
   "det_mass_kg": 2,
   "ds": {
     "note": "data sets",
+    "1": ["1", "2019 HADES Th228 Source"],
     "23": ["23", "2019 HADES HV scan 60Co "],
     "24": ["24", "2019 HADES HV scan 60Co "],
     "25": ["25", "2019 HADES HV scan 60Co "],
@@ -38,8 +40,8 @@
   "pks":{
     "238.6":"212Pb", "351.9":"214Pb", "511.0":"beta+",
     "583.2":"208Tl", "609.3":"214Bi", "911.2":"228Ac",
-    "969.0":"228Ac", "1173.3":"60Co1", "1120.3":"214Bi", 
-    "1332.5":"60Co2","1460.8":"40K", "1764.5":"214Bi", 
+    "969.0":"228Ac", "1173.3":"60Co1", "1120.3":"214Bi",
+    "1332.5":"60Co2","1460.8":"40K", "1764.5":"214Bi",
     "2505.7":"60CoSum","2614.5":"208Tl"
   },
   "cal_peaks":[1332.5,1173.3],

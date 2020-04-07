@@ -262,7 +262,7 @@ def process_llama_3316(t0_file, t1_file, run, n_max, config, verbose):
         filename_mod = filename_raw + "." + numb
         print("redirecting output file to packetfile "+filename_mod)
         digitizer.save_to_pytables(filename_mod, verbose)
-    
+
 
     # start scanning
     while (packet_id < n_max and f_in.tell() < file_size):
@@ -311,7 +311,7 @@ def process_llama_3316(t0_file, t1_file, run, n_max, config, verbose):
     with pd.HDFStore(t1_file,'r') as store:
         print(store.keys())
     #    # print(store.info())
-    
+
 
 
 def process_compass(t0_file, t1_file, digitizer, output_dir=None):
