@@ -18,7 +18,6 @@ class Processor:
         self.function = function
         self.fun_args = fun_args # so fun
 
-
     def process_block(self, waves, calcs):
         """
         run the given calculation. we always pass in:
@@ -51,7 +50,7 @@ class Intercom:
     so if you want one to depend on the result of another,
     order your input list accordingly.
     """
-    def __init__(self, settings=None, default_list=False, go_fast=False):
+    def __init__(self, settings=None, default_list=False):
 
         self.proc_list = []
         self.calcs = None # df for calculation results (no wfs)
@@ -126,7 +125,6 @@ class Intercom:
           if self.waves["settings"]["blsub"]["blest"] == "fcdaq":
             self.calcs["fcdaq"] = data_df.bl.values
 
-
     def process(self, data_df, verbose=False, wfnames_out=None):
         """
         Apply each processor to the Tier 1 input dataframe,
@@ -140,7 +138,7 @@ class Intercom:
             if verbose:
                 print(" -> ", processor.function.__name__, processor.fun_args)
 
-            p_result = processor.process_block(self.waves, self.calcs) # need to actually pass ndarrays here
+            p_result = processor.process_block(self.waves, self.calcs)
 
             if isinstance(processor, Calculator):
                 # self.calcs is updated inside the functions right now
@@ -157,6 +155,3 @@ class Intercom:
         return self.calcs
 
 
-    def fast_add():
-        from pygama.cygama import fast_add
-        

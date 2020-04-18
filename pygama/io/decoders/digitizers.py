@@ -266,7 +266,7 @@ class SIS3302Decoder(Digitizer):
         # send any variable with a name in "decoded_values" to the pandas output
         self.format_data(locals())
 
-
+        
 class SIS3316Decoder(Digitizer):
     """ handle Struck 3316 digitizer """
     #toDo: handle per-channel data (gain, ...)
@@ -305,13 +305,13 @@ class SIS3316Decoder(Digitizer):
 
         # self.event_header_length = 1 #?
         self.sample_period = 0  # ns, I will set this later, according to header info
-        self.gain = 0
+        self.gain = 0           
         self.h5_format = "table"
         #self.n_blsamp = 2000
         self.ievt = 0       #event number
         self.ievtg = 0      #garbage event number
         self.window = False
-
+        
     def initialize(self, sample_period, gain):
         """
         sets certain global values from a run, like:
@@ -321,26 +321,26 @@ class SIS3316Decoder(Digitizer):
         """
         self.sample_period = sample_period
         self.gain = gain
-
+        
     def decode_event(self,
                      event_data_bytes,
                      packet_id,
                      header_dict,
-                     fadcIndex,
+                     fadcIndex, 
                      channelIndex,
                      verbose=False):
         """
         see the llamaDAQ documentation for data word diagrams
         """
-
+        
         if self.sample_period == 0:
             print("ERROR: Sample period not set; use initialize() before using decode_event() on SIS3316Decoder")
             raise Exception ("Sample period not set")
-
+        
         # parse the raw event data into numpy arrays of 16 and 32 bit ints
         evt_data_32 = np.fromstring(event_data_bytes, dtype=np.uint32)
         evt_data_16 = np.fromstring(event_data_bytes, dtype=np.uint16)
-
+        
         # e sti gran binaries non ce li metti
         timestamp = ((evt_data_32[0] & 0xffff0000) << 16) + evt_data_32[1]
         format_bits = (evt_data_32[0]) & 0x0000000f
@@ -373,8 +373,8 @@ class SIS3316Decoder(Digitizer):
         offset += 1 #now the offset points to the wf data
         fadcID = fadcIndex
         channel = channelIndex
-
-
+        
+        
         # compute expected and actual array dimensions
         wf_length16 = 2 * wf_length_32
         header_length16 = offset * 2
@@ -455,7 +455,7 @@ class FlashCamDecoder(Digitizer):
       "waveform": [],
     }
     super().__init__(*args, **kwargs) # also initializes the garbage df
-
+        
     self.event_header_length = 1
     self.sample_period = 16  # ns
     self.h5_format = "table"
@@ -463,7 +463,7 @@ class FlashCamDecoder(Digitizer):
     self.window = False
     self.ievt = 0
     self.ievtg = 0
-
+          
   def decode_event(self,
                    io,
                    packet_id,
@@ -486,7 +486,7 @@ class FlashCamDecoder(Digitizer):
       # final raw wf array
       waveform = io.traces
       waveform.astype(float)
-
+      
       # if the wf is too big for pytables, we can window it,
       # but we might get some garbage
       if self.window:
@@ -512,7 +512,7 @@ class FlashCamDecoder(Digitizer):
       self.ievt += 1
 
       # send any variable with a name in "decoded_values" to the pandas output
-      self.format_data(locals())
+      self.format_data(locals())  
 
 
   class SIS3316ORCADecoder(Digitizer):
@@ -521,7 +521,7 @@ class FlashCamDecoder(Digitizer):
     #       most metadata of Struck header (energy, ...)
 
     def __init__(self, *args, **kwargs):
-
+        
         self.decoder_name = 'ORSIS3316WaveformDecoder'
         self.class_name = 'ORSIS3316Model'
 
@@ -539,20 +539,20 @@ class FlashCamDecoder(Digitizer):
 
         # self.event_header_length = 1 #?
         self.sample_period = 10  # ns, I will set this later, according to header info
-        self.gain = 0
+        self.gain = 0           
         self.h5_format = "table"
         self.ievt = 0       #event number
         self.ievtg = 0      #garbage event number
         self.window = False
-
-
+        
+        
     def decode_event(self,
                      event_data_bytes,
                      packet_id,
                      header_dict,
                      verbose=False):
-
-
+        
+        
         # parse the raw event data into numpy arrays of 16 and 32 bit ints
         evt_data_32 = np.fromstring(event_data_bytes, dtype=np.uint32)
         evt_data_16 = np.fromstring(event_data_bytes, dtype=np.uint16)
@@ -618,9 +618,11 @@ class CAENDT57XX(Digitizer):
     """
     Handles CAENDT5725 or CAENDT5730 digitizers
     setting the model_name will set the appropriate sample_rate
+
     Use the input_settings function to set certain variables by passing
     a dictionary, this will most importantly assemble the file header used
     by CAEN CoMPASS to label output files.
+
     """
     def __init__(self, model_name, *args, **kwargs):
         self.id = None

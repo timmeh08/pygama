@@ -33,7 +33,7 @@ def main():
     # global meta_dir
     # meta_dir = runDB["meta_dir"]
 
-    run_db, cal_db = "../experiments/mj60/runDB.json", "../experiments/mj60/calDB.json"
+    run_db, cal_db = "../experiments/hades/runDB_example.json", "../experiments/hades/calDB.json"
 
     par = argparse.ArgumentParser(description="A/E cut for MJ60")
     arg, st, sf = par.add_argument, "store_true", "store_false"
