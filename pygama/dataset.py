@@ -180,20 +180,24 @@ class DataSet:
 
 
 
-
+           counter = 1
            # Check for tier1 Data
            for p, d, files in os.walk(self.tier1_dir):
                for f in files:
-                   if any("t1_run{}".format(r) in f for r in runs):
-                       run = int(f.split("run")[-1].split('.h5')[0])
-                       self.paths[run]["t1_path"] = "{}/{}".format(p,f)
+                   for r in runs:
+                       if int(f.split("run")[-1].split("-")[0]) == r:
+
+                           if counter==subfile:
+                              run = int(f.split("run")[-1].split("-")[0])
+                              self.paths[run]["t1_path"] = "{}/{}".format(p,f)
+                           counter+=1
 
 
            # Check for tier2 Data
            for p, d, files in os.walk(self.tier2_dir):
                for f in files:
-                   if any("t2_run{}".format(r) in f for r in runs):
-                       run = int(f.split("run")[-1].split('.h5')[0])
+                   if any("t2_{}".format(r) in f for r in runs):
+                       run = int(f.split("run")[-1].split("-")[0])
                        self.paths[run]["t2_path"] = "{}/{}".format(p,f)
 
 
